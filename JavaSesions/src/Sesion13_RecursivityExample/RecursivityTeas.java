@@ -58,6 +58,43 @@ class metodosRecursivos{
             cuentaProgresivaRecursiva(num + 1, limite);
         }
     }
+
+    public static int sumatoriaRecursiva(int num){
+        if (num == 1){
+            return 1;
+        }
+        return num + sumatoriaRecursiva(num - 1);
+    }
+
+    public static int factorialRecursivo(int num){
+        if (num == 1){
+            return 1;
+        }
+        return num * factorialRecursivo(num - 1);
+    }
+
+    // Metodo recursivo para mostrar una cadena inversa
+    public static String invertirCadenaRecursivo(String cadena){
+        if (cadena.length() < 2){
+            return cadena;
+        }
+        return invertirCadenaRecursivo(cadena.substring(1)) + cadena.charAt(0); 
+    }
+
+    // Eliminar todas las instancias de una caracter de una cadena
+    public static String eliminarCaracterRecursivo(String cadena, char caracter){
+        if (cadena.length() == 0){
+            return new String();
+        }
+        else{
+            if (cadena.charAt(0) == caracter){
+                return eliminarCaracterRecursivo(cadena.substring(1), caracter);
+            }
+            else{
+                return cadena.charAt(0) + eliminarCaracterRecursivo(cadena.substring(1), caracter);
+            }
+        }
+    }
 }
 
 public class RecursivityTeas {   
@@ -73,5 +110,21 @@ public class RecursivityTeas {
 
         System.out.println("========== METODO RECURSIVO PROGRESIVO ==========");
         metodosRecursivos.cuentaProgresivaRecursiva(1, 10);
+
+        System.out.println("========== METODO RECURSIVO SUMATORIA ==========");
+        int sum = metodosRecursivos.sumatoriaRecursiva(5);
+        System.out.println(sum);
+
+        System.out.println("========== METODO RECURSIVO FACTORIAL ==========");
+        int fact = metodosRecursivos.factorialRecursivo(5);
+        System.out.println(fact);
+
+        System.out.println("========== METODO RECURSIVO CADENA INVERSA ==========");
+        String inv = metodosRecursivos.invertirCadenaRecursivo("sistemas");
+        System.out.println(inv);
+
+        System.out.println("========== METODO RECURSIVO ELIMINAR INSTANCIAS ==========");
+        String elim = metodosRecursivos.eliminarCaracterRecursivo("sistemas", 's');
+        System.out.println(elim);
     }
 }
