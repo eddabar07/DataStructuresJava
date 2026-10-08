@@ -99,7 +99,7 @@ public class MinadoBitcoins {
 
         // Declaracion de variables
         double sumaBitcoins = 0;
-        int totalSemanas = 0;
+        int totalSemanas = listaBitcoins.size();
 
         // Obtener Cantidades del ArrayList
         for (BitcoinsMinados bm : listaBitcoins){
@@ -109,7 +109,6 @@ public class MinadoBitcoins {
             for (int i = 0; i < bitcoin.length; i++) { // Recorre todos los días
                 for (int j = 0; j < bitcoin[i].length; j++) {
                     sumaBitcoins += bitcoin[i][j];
-                    totalSemanas ++;
                 }
             }
         }
@@ -145,11 +144,11 @@ public class MinadoBitcoins {
 
             // Sumar cantidades
             for (int i = 0; i < bitcoin.length; i++) {
-            for (int j = 0; j < bitcoin[i].length; j++) {
-                sumaBitcoins += bitcoin[i][j];
+                for (int j = 0; j < bitcoin[i].length; j++) {
+                    sumaBitcoins += bitcoin[i][j];
+                }
+                totalDias ++;
             }
-            totalDias ++;
-        }
         }
 
         // Calcular promedio
