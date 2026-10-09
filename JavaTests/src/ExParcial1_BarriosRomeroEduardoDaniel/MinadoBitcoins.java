@@ -85,7 +85,6 @@ public class MinadoBitcoins {
         // Mostrar resultado
         System.out.println("========== PROMEDIO DE BITCOINS TOTALES ==========");
         System.out.println("Suma Total de Bitcoins: " + sumaBitcoins);
-        System.out.println("Total de Bitcoins Suamados: " + totalElementos);
         System.out.println("Promedio Total de Bitcoins : " + promedioTotal + " ₿");
     }
 
@@ -121,7 +120,6 @@ public class MinadoBitcoins {
         // Mostrar resultado
         System.out.println("========== PROMEDIO DE BITCOINS POR SEMANA ==========");
         System.out.println("Suma Total de Bitcoins: " + sumaBitcoins);
-        System.out.println("Total de Bitcoins Suamados: " + totalSemanas);
         System.out.println("Promedio Total de Bitcoins : " + promedioTotal + " ₿");
     }
 
@@ -159,7 +157,6 @@ public class MinadoBitcoins {
         // Mostrar resultado
         System.out.println("========== PROMEDIO DE BITCOINS POR DIA ==========");
         System.out.println("Suma Total de Bitcoins: " + sumaBitcoins);
-        System.out.println("Total de Bitcoins Suamados: " + totalDias);
         System.out.println("Promedio Total de Bitcoins : " + promedioTotal + "₿");
     }
 }
