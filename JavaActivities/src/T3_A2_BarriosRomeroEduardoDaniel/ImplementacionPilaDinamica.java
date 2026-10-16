@@ -1,9 +1,12 @@
 package T3_A2_BarriosRomeroEduardoDaniel;
 
+import java.util.Scanner;
 import java.util.Stack;
 
 public class ImplementacionPilaDinamica implements RentaPeliculas{
     Stack <Pelicula> baseDatos = new Stack<>();
+    Scanner sc = new Scanner(System.in);
+
 
     @Override 
     public void cargarBD(){
@@ -21,6 +24,8 @@ public class ImplementacionPilaDinamica implements RentaPeliculas{
         
         Pelicula p5 = new Pelicula("Avengers Infinity War", "Accion");
         baseDatos.push(p5);
+
+        System.out.println("Base de Datos Cargada Correctamente");
     }
 
     @Override 
@@ -31,22 +36,29 @@ public class ImplementacionPilaDinamica implements RentaPeliculas{
         }
 
         System.out.println("Pelicula Rentada:");
-        baseDatos.peek();
+        System.out.println();
         baseDatos.pop();
     }
 
     @Override 
-    public void devolverPelicula(){
-        Pelicula pelicula = new Pelicula();
-        
+    public void devolverPelicula(){        
         if (estaLleno()){
             System.out.println("El inventario se encuentra lleno");
             return;
         }
 
+        System.out.print("Pelicula a Devolver: ");
+        String titulo = sc.nextLine();
+
+        System.out.print("Genero de la Pelicula a Devolver: ");
+        String genero = sc.nextLine();
+
+
+        Pelicula pelicula = new Pelicula(titulo, genero);
         baseDatos.push(pelicula);
         System.out.println("Pelicula Devuelta:");
         baseDatos.peek();
+
     }
 
     @Override 
@@ -69,5 +81,47 @@ public class ImplementacionPilaDinamica implements RentaPeliculas{
     @Override 
     public boolean estaVacio(){
         return baseDatos.isEmpty();
+    }
+
+    @Override 
+    public void menuOpciones(){
+        int opc;
+
+        do{
+            // Menu de opciones usuario
+            System.out.println("\n========== RENTA DE PELICULAS ==========");
+            System.out.println("""
+                    1.- Cargar BD de peliculas
+                    2.- Renta de Pelicula
+                    3.- Devolver Pelicula
+                    4.- Mostrar Cantidad de Peliculas Disponibles
+                    5.- Regresar
+                    """);
+            System.out.print("Ingresa una Opción: ");
+            opc = sc.nextInt();
+            sc.nextLine();
+            System.out.println();
+
+            // Menu de opciones logica
+            switch (opc) {
+                case 1:
+                    cargarBD();
+                    break;
+                case 2:
+                    rentarPelicula();
+                    break;
+                case 3:
+                    devolverPelicula();
+                    break;
+                case 4:
+                    mostraPeliculas();
+                    break;
+                case 5:
+                    break;
+                default:
+                    System.err.println("Opción Invalida. Intente Nuevamente");
+                    break;
+            }
+        } while (opc != 5);
     }
 }

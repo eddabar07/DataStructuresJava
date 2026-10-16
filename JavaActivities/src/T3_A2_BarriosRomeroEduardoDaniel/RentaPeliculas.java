@@ -12,4 +12,6 @@ public interface RentaPeliculas {
     boolean estaLleno();
 
     boolean estaVacio();
+
+    void menuOpciones();
 }
