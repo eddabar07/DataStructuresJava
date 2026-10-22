@@ -70,7 +70,7 @@ class LinkedList{
         }
     }
 
-    // Agregar al final
+    // 2.2 Agregar al final
     public void agregarElementoFinal(int dato){ // Agrega elemento cuando la lista esta vacia
         if (nodoInicio == null){
             Nodo newNodo = new Nodo(dato);
@@ -82,6 +82,70 @@ class LinkedList{
             nodoFin.setApuntador(newNodo);
             
             nodoFin = newNodo;
+        }
+    }
+
+    // 2.3 Agregar en posicion especifica
+    public void agregarPosicionEspecifica(){
+        
+    }
+
+    // 3.1 Eliminar al inicio
+    public void eliminarInicio(){
+        if (nodoInicio == null){
+            System.out.println("La lista se encuentra vacia");
+        }
+        else{
+            nodoInicio = nodoInicio.getApuntador();
+        }
+    }
+
+    // 3.2 Eliminar al final
+    public void eliminarFinal(){
+        if (nodoInicio == null){
+            System.out.println("La lista se encuentra vacia");
+        }
+        else if (nodoInicio.getApuntador() == null){
+            nodoInicio = nodoInicio.getApuntador();
+        }
+        else{
+            Nodo nodoActual = nodoInicio.getApuntador();
+            Nodo nodoPosterior = nodoActual.getApuntador();
+            
+            while (nodoPosterior.getApuntador() != null){
+                nodoActual = nodoActual.getApuntador();
+                nodoPosterior = nodoPosterior.getApuntador();
+            }
+
+            nodoActual.setApuntador(nodoPosterior.getApuntador());
+        }
+    }
+
+    // 3.3 Eliminar elemento especifico
+    public void eliminarDatoEspecifico(int datoBuscar){
+        // Si la lista esta vacia...
+        if (nodoInicio == null){
+            System.out.println("Lista Vacia");
+        }
+        else if (datoBuscar == nodoInicio.getDato()){
+            System.out.println("Dato Encontrado en el Primer Nodo");
+            nodoInicio = nodoInicio.getApuntador();
+
+        } else{
+            Nodo nodoAnterior = nodoInicio;
+            Nodo nodoPosterior = nodoInicio.getApuntador();
+
+            // Buscar dato mientras que no termine la lista
+            while (datoBuscar != nodoPosterior.getDato() && nodoPosterior.getApuntador() != null){
+                nodoAnterior = nodoPosterior;
+                nodoPosterior = nodoPosterior.getApuntador();
+            }
+
+            if (datoBuscar == nodoPosterior.getDato()){
+                nodoAnterior.setApuntador(nodoPosterior.getApuntador());
+                nodoPosterior = nodoPosterior.getApuntador();
+            }
+            System.out.println("Dato no encontrado");
         }
     }
 
@@ -105,19 +169,25 @@ public class SimpleLinkedListTest {
         ll.mostrarElementos();
 
         System.out.println("Agregando un primer elemento...");
-       // ll.agregarElementoInicio(44);
+        ll.agregarElementoInicio(44);
         System.err.println("Recorriendo Lista cuando NO esta vacia...");
         ll.mostrarElementos();
 
-        //ll.agregarElementoInicio(33);
-        //ll.agregarElementoInicio(11);
-        //ll.agregarElementoInicio(1);
-        //ll.mostrarElementos();
+        ll.agregarElementoInicio(33);
+        ll.agregarElementoInicio(11);
+        ll.agregarElementoInicio(1);
+        ll.mostrarElementos();
         
         
         ll.agregarElementoFinal(88);
         ll.agregarElementoFinal(77);
         ll.agregarElementoFinal(99);
+        ll.mostrarElementos();
+
+        ll.eliminarInicio();
+        ll.mostrarElementos();
+
+        ll.eliminarFinal();
         ll.mostrarElementos();
     }
 }
