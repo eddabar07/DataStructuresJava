@@ -1,35 +1,44 @@
 package T3_A4_BarriosRomeroEduardoDaniel;
 
+import java.util.Scanner;
+
 public class App {
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
         LinkedList ll = new LinkedList();
+        int opc;
 
-        System.err.println("Recorriendo Lista cuando esta vacia...");
-        ll.mostrarElementos();
+        do{
+            // Menu de opciones usuarios
+            System.out.println("\n=== Listas Enlazadas (LinkedLists) ===");
+            System.out.println("""
+                1.- Insertar Elementos
+                2.- Eliminar Elementos
+                0.- Salir
+            """);
+            System.out.print("Ingresa una Opcion: ");
+            opc = sc.nextInt();
+            sc.nextLine();
+            System.out.println();
 
-        System.out.println("Agregando un primer elemento...");
-        ll.agregarElementoInicio(44);
-        System.err.println("Recorriendo Lista cuando NO esta vacia...");
-        ll.mostrarElementos();
+            // Menu de opciones logica
+            switch (opc) {
+                case 1:
+                    ll.menuInsertar();
+                    break;
 
-        ll.agregarElementoInicio(33);
-        ll.agregarElementoInicio(11);
-        ll.agregarElementoInicio(1);
-        ll.mostrarElementos();
-        
-        
-        ll.agregarElementoFinal(88);
-        ll.agregarElementoFinal(77);
-        ll.agregarElementoFinal(99);
-        ll.mostrarElementos();
+                case 2:
+                    ll.menuEliminar();
+                    break;
 
-        ll.eliminarInicio();
-        ll.mostrarElementos();
+                case 3:
+                    break;
 
-        ll.eliminarFinal();
-        ll.mostrarElementos();
-
-        ll.elimninarPosicionEspecifica(5);
-        ll.mostrarElementos();
+                default:
+                    System.out.println("Opcion Invalida. Intente Nuevamente");
+                    break;
+            }
+        } while (opc != 0); 
+        sc.close();  
     }
 }

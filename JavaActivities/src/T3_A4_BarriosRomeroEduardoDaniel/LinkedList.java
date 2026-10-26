@@ -1,6 +1,9 @@
 package T3_A4_BarriosRomeroEduardoDaniel;
 
+import java.util.Scanner;
+
 public class LinkedList {
+    Scanner sc = new Scanner(System.in);
     Nodo nodoInicio;
     Nodo nodoFin;
 
@@ -57,6 +60,7 @@ public class LinkedList {
         }
         else if (nodoInicio.getApuntador() == null){
             nodoInicio = nodoInicio.getApuntador();
+            return;
         }
         else{
             Nodo nodoActual = nodoInicio.getApuntador();
@@ -134,17 +138,120 @@ public class LinkedList {
 
     // 4. Mostrar Elementos (recorrido)
     public void mostrarElementos(){
-        Nodo nodoActual = nodoInicio;
-
-        while(nodoActual != null){
-            System.out.print("[" + nodoActual.getDato() + "] ==> ");
-            nodoActual = nodoActual.getApuntador();
+        if (nodoInicio == null){
+            System.out.println("La lista se encuentra vacia");
+            return;
         }
-        System.out.println();
+        else{
+            Nodo nodoActual = nodoInicio;
+
+            while(nodoActual != null){
+                System.out.print("[" + nodoActual.getDato() + "] ==> ");
+                nodoActual = nodoActual.getApuntador();
+            }
+            System.out.println();
+        }
     }
 
     // Menu insertar
     public void menuInsertar(){
+        int opc;
 
+        do{
+            // Menu de opciones usuarios
+            System.out.println("\n=== Insertar Elementos ===");
+            System.out.println("""
+                1.- Insertar elemento al inicio
+                2.- Insertar elemento al final
+                3.- Mostrar Elementos
+                4.- Regresar
+            """);
+            System.out.print("Ingresa una Opcion: ");
+            opc = sc.nextInt();
+            sc.nextLine();
+            System.out.println();
+
+            // Menu de opciones logica
+            switch (opc) {
+                case 1:
+                    System.out.print("Elemento a ingresar: ");
+                    agregarElementoInicio(sc.nextInt());
+                    sc.nextLine();
+                    break;
+
+                case 2:
+                    System.out.print("Elemento a ingresar: ");
+                    agregarElementoFinal(sc.nextInt());
+                    sc.nextLine();
+                    break;
+
+                case 3:
+                    mostrarElementos();
+                    break;
+
+                case 4:
+                    break;
+
+                default:
+                    System.out.println("Opcion Invalida. Intente Nuevamente");
+                    break;
+            }
+        } while (opc != 4);
+    }
+
+    // Menu insertar
+    public void menuEliminar(){
+        int opc;
+
+        do{
+            // Menu de opciones usuarios
+            System.out.println("\n=== Eliminar Elementos ===");
+            System.out.println("""
+                1.- Eliminar elemento al inicio
+                2.- Eliminar elemento al final
+                3.- Eliminar elemento por dato
+                4.- Eliminar elemento por posicion
+                5.- Mostrar Elementos
+                6.- Regresar
+            """);
+            System.out.print("Ingresa una Opcion: ");
+            opc = sc.nextInt();
+            sc.nextLine();
+            System.out.println();
+
+            // Menu de opciones logica
+            switch (opc) {
+                case 1:
+                    eliminarInicio();
+                    break;
+
+                case 2:
+                    eliminarFinal();
+                    break;
+
+                case 3:
+                    System.out.print("Dato a eliminar: ");
+                    eliminarDatoEspecifico(sc.nextInt());
+                    sc.nextLine();
+                    break;
+
+                case 4:
+                    System.out.print("Posicion del elemento a eliminar: ");
+                    elimninarPosicionEspecifica(sc.nextInt());
+                    sc.nextLine();
+                    break;
+
+                case 5:
+                    mostrarElementos();
+                    break;
+
+                case 6:
+                    break;
+
+                default:
+                    System.out.println("Opcion Invalida. Intente Nuevamente");
+                    break;
+            }
+        }while (opc != 6);    
     }
 }

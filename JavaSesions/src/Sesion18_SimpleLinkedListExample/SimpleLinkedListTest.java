@@ -1,5 +1,7 @@
 package Sesion18_SimpleLinkedListExample;
 
+import java.util.Scanner;
+
 class Nodo{
     // Declaracion de variables
     private int dato;
@@ -48,6 +50,7 @@ class Nodo{
  */
 
 class LinkedList{
+    Scanner sc = new Scanner(System.in);
     Nodo nodoInicio;
     Nodo nodoFin;
 
@@ -85,15 +88,11 @@ class LinkedList{
         }
     }
 
-    // 2.3 Agregar en posicion especifica
-    public void agregarPosicionEspecifica(){
-        
-    }
-
     // 3.1 Eliminar al inicio
     public void eliminarInicio(){
         if (nodoInicio == null){
             System.out.println("La lista se encuentra vacia");
+            return;
         }
         else{
             nodoInicio = nodoInicio.getApuntador();
@@ -104,9 +103,11 @@ class LinkedList{
     public void eliminarFinal(){
         if (nodoInicio == null){
             System.out.println("La lista se encuentra vacia");
+            return;
         }
         else if (nodoInicio.getApuntador() == null){
             nodoInicio = nodoInicio.getApuntador();
+            return;
         }
         else{
             Nodo nodoActual = nodoInicio.getApuntador();
@@ -125,7 +126,8 @@ class LinkedList{
     public void eliminarDatoEspecifico(int datoBuscar){
         // Si la lista esta vacia...
         if (nodoInicio == null){
-            System.out.println("Lista Vacia");
+            System.out.println("La lista se encuentra vacia");
+            return;
         }
         else if (datoBuscar == nodoInicio.getDato()){
             System.out.println("Dato Encontrado en el Primer Nodo");
@@ -149,45 +151,195 @@ class LinkedList{
         }
     }
 
+    // 3.4 Eliminar elemento posicion especifica 
+    public void elimninarPosicionEspecifica(int posicion){
+        if (posicion < 0){
+            System.out.println("Posicion Invalida");
+            return;
+        }
+        else if (posicion == 0){
+            nodoInicio = nodoInicio.getApuntador();
+            return;
+        }
+        else{
+            Nodo nodoAnterior = nodoInicio;
+            Nodo nodoEliminar;
+            int contador = 0;
+
+            while (contador < posicion -1 && nodoAnterior.getApuntador() != null) {
+                nodoAnterior = nodoAnterior.getApuntador();
+                contador++;
+            }
+
+            // Comprobar si existe la posicion
+            if (nodoAnterior.getApuntador() != null){
+                nodoEliminar = nodoAnterior.getApuntador();
+                nodoAnterior.setApuntador(nodoEliminar.getApuntador());
+            }
+            else{
+                System.out.println("La posicion " + posicion + " no existe");
+                return;
+            }
+        }
+    }
+
     // 4. Mostrar Elementos (recorrido)
     public void mostrarElementos(){
-        Nodo nodoActual = nodoInicio;
-
-        while(nodoActual != null){
-            System.out.print("[" + nodoActual.getDato() + "] ==> ");
-            nodoActual = nodoActual.getApuntador();
+        if (nodoInicio == null){
+            System.out.println("La lista se encuentra vacia");
+            return;
         }
-        System.out.println();
+        else{
+            Nodo nodoActual = nodoInicio;
+
+            while(nodoActual != null){
+                System.out.print("[" + nodoActual.getDato() + "] ==> ");
+                nodoActual = nodoActual.getApuntador();
+            }
+            System.out.println();
+        }
+    }
+
+    // Menu insertar
+    public void menuInsertar(){
+        int opc;
+
+        do{
+            // Menu de opciones usuarios
+            System.out.println("\n=== Insertar Elementos ===");
+            System.out.println("""
+                1.- Insertar elemento al inicio
+                2.- Insertar elemento al final
+                3.- Mostrar Elementos
+                4.- Regresar
+            """);
+            System.out.print("Ingresa una Opcion: ");
+            opc = sc.nextInt();
+            sc.nextLine();
+            System.out.println();
+
+            // Menu de opciones logica
+            switch (opc) {
+                case 1:
+                    System.out.print("Elemento a ingresar: ");
+                    agregarElementoInicio(sc.nextInt());
+                    sc.nextLine();
+                    break;
+
+                case 2:
+                    System.out.print("Elemento a ingresar: ");
+                    agregarElementoFinal(sc.nextInt());
+                    sc.nextLine();
+                    break;
+
+                case 3:
+                    mostrarElementos();
+                    break;
+
+                case 4:
+                    break;
+
+                default:
+                    System.out.println("Opcion Invalida. Intente Nuevamente");
+                    break;
+            }
+        } while (opc != 4);
+    }
+
+    // Menu insertar
+    public void menuEliminar(){
+        int opc;
+
+        do{
+            // Menu de opciones usuarios
+            System.out.println("\n=== Eliminar Elementos ===");
+            System.out.println("""
+                1.- Eliminar elemento al inicio
+                2.- Eliminar elemento al final
+                3.- Eliminar elemento por dato
+                4.- Eliminar elemento por posicion
+                5.- Mostrar Elementos
+                6.- Regresar
+            """);
+            System.out.print("Ingresa una Opcion: ");
+            opc = sc.nextInt();
+            sc.nextLine();
+            System.out.println();
+
+            // Menu de opciones logica
+            switch (opc) {
+                case 1:
+                    eliminarInicio();
+                    break;
+
+                case 2:
+                    eliminarFinal();
+                    break;
+
+                case 3:
+                    System.out.print("Dato a eliminar: ");
+                    eliminarDatoEspecifico(sc.nextInt());
+                    sc.nextLine();
+                    break;
+
+                case 4:
+                    System.out.print("Posicion del elemento a eliminar: ");
+                    elimninarPosicionEspecifica(sc.nextInt());
+                    sc.nextLine();
+                    break;
+
+                case 5:
+                    mostrarElementos();
+                    break;
+
+                case 6:
+                    break;
+
+                default:
+                    System.out.println("Opcion Invalida. Intente Nuevamente");
+                    break;
+            }
+        }while (opc != 6);    
     }
 }
 
 public class SimpleLinkedListTest {
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
         LinkedList ll = new LinkedList();
+        int opc;
 
-        System.err.println("Recorriendo Lista cuando esta vacia...");
-        ll.mostrarElementos();
+        do{
+            // Menu de opciones usuarios
+            System.out.println("\n=== Listas Enlazadas (LinkedLists) ===");
+            System.out.println("""
+                1.- Insertar Elementos
+                2.- Eliminar Elementos
+                0.- Salir
+            """);
+            System.out.print("Ingresa una Opcion: ");
+            opc = sc.nextInt();
+            sc.nextLine();
+            System.out.println();
 
-        System.out.println("Agregando un primer elemento...");
-        ll.agregarElementoInicio(44);
-        System.err.println("Recorriendo Lista cuando NO esta vacia...");
-        ll.mostrarElementos();
+            // Menu de opciones logica
+            switch (opc) {
+                case 1:
+                    ll.menuInsertar();
+                    break;
 
-        ll.agregarElementoInicio(33);
-        ll.agregarElementoInicio(11);
-        ll.agregarElementoInicio(1);
-        ll.mostrarElementos();
-        
-        
-        ll.agregarElementoFinal(88);
-        ll.agregarElementoFinal(77);
-        ll.agregarElementoFinal(99);
-        ll.mostrarElementos();
+                case 2:
+                    ll.menuEliminar();
+                    break;
 
-        ll.eliminarInicio();
-        ll.mostrarElementos();
+                case 3:
+                    break;
 
-        ll.eliminarFinal();
-        ll.mostrarElementos();
+                default:
+                    System.out.println("Opcion Invalida. Intente Nuevamente");
+                    break;
+            }
+        } while (opc != 0); 
+        sc.close(); 
     }
 }
