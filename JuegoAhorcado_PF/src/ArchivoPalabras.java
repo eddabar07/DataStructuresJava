@@ -1,7 +1,50 @@
 import java.util.Scanner;
+
+import javax.swing.JOptionPane;
+
 import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 
 public class ArchivoPalabras {
+    // Crear archivo
+    public void crearArchivo() throws Exception{
+        File nuevoArchivo = new File("Palabras.txt");
+
+        // Verificar si el archivo ya exixste
+        if (!nuevoArchivo.exists()){
+            nuevoArchivo.createNewFile();
+            JOptionPane.showMessageDialog(null, "Archivo Creado Correctamente", "Nuevo Archivo",
+                JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "El Archivo Ya Existe", "Nuevo Archivo",
+                JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    // Cargar palabras al archivo mediante teclado
+    public void cargarPalabrasArchivo() throws Exception{
+        // Scanner para leer las palabras por teclado
+        Scanner capturar  = new Scanner(System.in);
+
+        // Abrir archivo para poder escribir sobre el
+        PrintWriter escribir = new PrintWriter(new FileWriter("Palabras.txt", true));
+
+        // Solicitar la palabra a agregar
+        JOptionPane.showInputDialog(null, "Ingrese la Palabra: ", "Cargar Palabra",
+            JOptionPane.INFORMATION_MESSAGE);
+        String palabra = capturar.nextLine().trim().toUpperCase();
+
+        // Guardar palabra en el archivo
+        escribir.println(palabra);
+        escribir.close();
+        capturar.close();
+
+        // Mensaje de confirmacion
+        JOptionPane.showMessageDialog(null, "Palabra Guardada Correctamente", "Cargar Palabra",
+            JOptionPane.INFORMATION_MESSAGE);
+    }
+
     // Metodo para leer las palabras del archivo
     public String[] leerPalabras() throws Exception{
         // Scanner para acceder y leer el archivo
@@ -34,5 +77,5 @@ public class ArchivoPalabras {
 
         // Retornar el vector con las palabras
         return palabras;
-    }
+    } 
 }
