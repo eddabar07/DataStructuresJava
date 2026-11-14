@@ -9,7 +9,7 @@ import java.io.PrintWriter;
 public class ArchivoPalabras {
     // Crear archivo
     public void crearArchivo() throws Exception{
-        File nuevoArchivo = new File("Palabras.txt");
+        File nuevoArchivo = new File("src/Palabras.txt");
 
         // Verificar si el archivo ya exixste
         if (!nuevoArchivo.exists()){
@@ -28,7 +28,7 @@ public class ArchivoPalabras {
         Scanner capturar  = new Scanner(System.in);
 
         // Abrir archivo para poder escribir sobre el
-        PrintWriter escribir = new PrintWriter(new FileWriter("Palabras.txt", true));
+        PrintWriter escribir = new PrintWriter(new FileWriter("src/Palabras.txt", true));
 
         // Solicitar la palabra a agregar
         JOptionPane.showInputDialog(null, "Ingrese la Palabra: ", "Cargar Palabra",
@@ -78,4 +78,27 @@ public class ArchivoPalabras {
         // Retornar el vector con las palabras
         return palabras;
     } 
+
+    // Borrar el archivo y crear uno nuevo vacio
+    public void reiniciarArchivo() throws Exception{
+        File archivoNuevo = new File("src/Palabras.txt");
+
+        // Comprobar si existe el archivo
+        if (archivoNuevo.exists()){
+            // Eliminar archivo
+            archivoNuevo.delete();
+
+            JOptionPane.showMessageDialog(null, "Archivo Eliminado", "Reiniciar Archivo",
+                JOptionPane.INFORMATION_MESSAGE);
+            
+            // Crear nuevo archivo
+            archivoNuevo.createNewFile();
+            
+            JOptionPane.showMessageDialog(null, "El Nuevo Archivo se Creo Exitosamente", "Reiniciar Archivo",
+                JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "El Archivo No Existe", "Reiniciar Archivo",
+                JOptionPane.ERROR_MESSAGE);
+        }
+    }
 }
